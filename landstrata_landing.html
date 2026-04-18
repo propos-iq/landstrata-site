@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PropOS IQ — UK Property Intelligence Platform</title>
+  <meta name="description" content="PropOS IQ is a Bloomberg Terminal for UK property. Instant lender risk, investment scoring and planning intelligence across 35,000+ LSOAs in England.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:   #080d14;
+      --navy2:  #0d1520;
+      --navy3:  #111c2a;
+      --border: rgba(255,255,255,0.08);
+      --border2:rgba(255,255,255,0.14);
+      --cyan:   #00d4ff;
+      --teal:   #00ffc0;
+      --amber:  #ffb830;
+      --red:    #ff4d6a;
+      --text:   #ffffff;
+      --text2:  #a8b8cc;
+      --text3:  #566070;
+      --mono:   'DM Mono', monospace;
+      --sans:   'Instrument Sans', sans-serif;
+      --display:'Bebas Neue', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 2px; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 64px;
+      background: rgba(8,13,20,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 22px;
+      letter-spacing: 0.05em;
+      color: var(--text);
+    }
+    .nav-logo span { color: var(--cyan); }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; }
+    .nav-links a {
+      font-size: 13px; color: var(--text2); text-decoration: none;
+      font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-cta {
+      background: var(--cyan); color: var(--navy);
+      border: none; border-radius: 6px;
+      padding: 9px 22px; font-size: 13px; font-weight: 600;
+      font-family: var(--sans); cursor: pointer; transition: all 0.2s;
+      text-decoration: none; letter-spacing: 0.02em;
+    }
+    .nav-cta:hover { background: #33ddff; transform: translateY(-1px); }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 120px 2rem 80px;
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent);
+    }
+    .hero-glow {
+      position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 600px; z-index: 0;
+      background: radial-gradient(ellipse at center,
+        rgba(0,212,255,0.12) 0%, rgba(0,255,192,0.06) 40%, transparent 70%);
+    }
+    .hero-tag {
+      position: relative; z-index: 1;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-family: var(--mono); font-size: 11px;
+      color: var(--cyan); letter-spacing: 0.08em;
+      margin-bottom: 2rem;
+    }
+    .hero-tag::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--cyan); border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.2)} }
+
+    .hero h1 {
+      position: relative; z-index: 1;
+      font-family: var(--display);
+      font-size: clamp(56px, 10vw, 120px);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 .line1 { display: block; color: var(--text); }
+    .hero h1 .line2 { display: block; color: var(--cyan); }
+    .hero-sub {
+      position: relative; z-index: 1;
+      max-width: 600px; margin: 0 auto 2.5rem;
+      font-size: 18px; color: var(--text2);
+      font-weight: 300; line-height: 1.7;
+    }
+    .hero-sub strong { color: var(--text); font-weight: 500; }
+    .hero-actions {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      justify-content: center; margin-bottom: 4rem;
+    }
+    .btn-primary {
+      background: var(--cyan); color: var(--navy);
+      border: none; border-radius: 8px;
+      padding: 14px 32px; font-size: 15px; font-weight: 600;
+      font-family: var(--sans); cursor: pointer;
+      text-decoration: none; transition: all 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .btn-primary:hover { background: #33ddff; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,212,255,0.3); }
+    .btn-ghost {
+      background: transparent; color: var(--text2);
+      border: 1px solid var(--border2); border-radius: 8px;
+      padding: 14px 32px; font-size: 15px; font-weight: 500;
+      font-family: var(--sans); cursor: pointer;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* ── Stats bar ── */
+    .stats {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; gap: 0;
+      flex-wrap: wrap; justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+    }
+    .stat-item {
+      padding: 20px 36px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-value {
+      font-family: var(--display);
+      font-size: 36px;
+      color: var(--cyan);
+      letter-spacing: 0.02em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Section base ── */
+    section { padding: 100px 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--cyan); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--display);
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: 1; letter-spacing: 0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .section-sub {
+      font-size: 17px; color: var(--text2);
+      max-width: 580px; line-height: 1.7; font-weight: 300;
+    }
+
+    /* ── Problem ── */
+    .problem { background: var(--navy2); }
+    .problem-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; margin-top: 3rem;
+    }
+    .problem-cell {
+      background: var(--navy2);
+      padding: 2.5rem;
+    }
+    .problem-icon {
+      font-size: 28px; margin-bottom: 1rem;
+    }
+    .problem-cell h3 {
+      font-family: var(--display); font-size: 26px;
+      letter-spacing: 0.02em; color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .problem-cell p { font-size: 14px; color: var(--text2); line-height: 1.7; }
+
+    /* ── Solution / Query demo ── */
+    .demo-box {
+      margin-top: 3rem;
+      border: 1px solid var(--border2);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--navy3);
+    }
+    .demo-bar {
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .demo-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .demo-content { padding: 2rem; }
+    .demo-query {
+      font-family: var(--mono); font-size: 13px;
+      color: var(--cyan); margin-bottom: 1.5rem;
+      padding: 12px 16px;
+      background: rgba(0,212,255,0.05);
+      border: 1px solid rgba(0,212,255,0.15);
+      border-radius: 8px;
+    }
+    .demo-query::before { content: '› '; opacity: 0.6; }
+    .demo-response { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .demo-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 1rem;
+    }
+    .demo-card-label {
+      font-family: var(--mono); font-size: 9px;
+      color: var(--text3); text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 6px;
+    }
+    .demo-card-value {
+      font-family: var(--display); font-size: 28px;
+      letter-spacing: 0.02em; margin-bottom: 4px;
+    }
+    .demo-card-sub { font-size: 11px; color: var(--text2); }
+    .c-green { color: var(--teal); }
+    .c-amber { color: var(--amber); }
+    .c-red   { color: var(--red); }
+    .c-cyan  { color: var(--cyan); }
+
+    /* ── Customers ── */
+    .customers { background: var(--navy2); }
+    .segment-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .segment-card {
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 2rem;
+      background: var(--navy3);
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .segment-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+    }
+    .segment-card.s1::before { background: var(--cyan); }
+    .segment-card.s2::before { background: var(--teal); }
+    .segment-card.s3::before { background: var(--amber); }
+    .segment-card.s4::before { background: var(--red); }
+    .segment-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+    .segment-icon { font-size: 32px; margin-bottom: 1rem; }
+    .segment-card h3 {
+      font-family: var(--display); font-size: 22px;
+      letter-spacing: 0.02em; margin-bottom: 0.5rem;
+    }
+    .segment-card p { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 1.25rem; }
+    .segment-bullets { list-style: none; }
+    .segment-bullets li {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text3); padding: 4px 0;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.02em;
+    }
+    .segment-bullets li:last-child { border-bottom: none; }
+    .segment-bullets li::before { content: '→ '; color: var(--cyan); }
+
+    /* ── Data sources ── */
+    .data-section { background: var(--navy); }
+    .data-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; margin-top: 3rem;
+    }
+    .data-cell {
+      background: var(--navy);
+      padding: 1.5rem; transition: background 0.2s;
+    }
+    .data-cell:hover { background: var(--navy3); }
+    .data-source {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--cyan); letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .data-cell h4 {
+      font-size: 14px; color: var(--text);
+      font-weight: 500; margin-bottom: 4px;
+    }
+    .data-cell p { font-size: 12px; color: var(--text3); }
+
+    /* ── How it works ── */
+    .how { background: var(--navy2); }
+    .flow {
+      display: flex; align-items: flex-start;
+      gap: 0; margin-top: 3rem; position: relative;
+    }
+    .flow::before {
+      content: ''; position: absolute;
+      top: 28px; left: 40px; right: 40px; height: 1px;
+      background: linear-gradient(90deg, var(--cyan), var(--teal), var(--cyan));
+      opacity: 0.2; z-index: 0;
+    }
+    .flow-step {
+      flex: 1; text-align: center;
+      padding: 0 1rem; position: relative; z-index: 1;
+    }
+    .flow-num {
+      width: 56px; height: 56px;
+      background: var(--navy);
+      border: 1px solid var(--cyan);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--display); font-size: 22px; color: var(--cyan);
+      margin: 0 auto 1rem;
+    }
+    .flow-step h4 {
+      font-family: var(--display); font-size: 16px;
+      letter-spacing: 0.05em; margin-bottom: 0.5rem;
+    }
+    .flow-step p { font-size: 12px; color: var(--text2); line-height: 1.6; }
+    .flow-tech {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--text3); margin-top: 6px; letter-spacing: 0.04em;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--navy3);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center; padding: 100px 2rem;
+    }
+    .cta-section h2 {
+      font-family: var(--display); font-size: clamp(40px, 8vw, 80px);
+      letter-spacing: 0.02em; margin-bottom: 1.5rem;
+    }
+    .cta-section h2 span { color: var(--cyan); }
+    .cta-section p {
+      font-size: 17px; color: var(--text2);
+      max-width: 500px; margin: 0 auto 2.5rem;
+      line-height: 1.7; font-weight: 300;
+    }
+    .demo-form {
+      display: flex; gap: 12px; max-width: 480px;
+      margin: 0 auto; flex-wrap: wrap; justify-content: center;
+    }
+    .demo-input {
+      flex: 1; min-width: 240px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border2);
+      border-radius: 8px; color: var(--text);
+      font-family: var(--sans); font-size: 14px;
+      padding: 13px 16px; outline: none;
+      transition: border-color 0.2s;
+    }
+    .demo-input::placeholder { color: var(--text3); }
+    .demo-input:focus { border-color: var(--cyan); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: var(--display); font-size: 18px;
+      letter-spacing: 0.05em;
+    }
+    .footer-logo span { color: var(--cyan); }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: 12px; color: var(--text3); text-decoration: none;
+      transition: color 0.2s; letter-spacing: 0.03em;
+    }
+    .footer-links a:hover { color: var(--cyan); }
+    .footer-copy { font-size: 12px; color: var(--text3); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .problem-grid { grid-template-columns: 1fr; }
+      .segment-grid { grid-template-columns: 1fr 1fr; }
+      .data-grid { grid-template-columns: repeat(2, 1fr); }
+      .flow { flex-direction: column; gap: 2rem; }
+      .flow::before { display: none; }
+      .flow-step { text-align: left; display: flex; align-items: flex-start; gap: 1rem; }
+      .flow-num { flex-shrink: 0; margin: 0; }
+      .stats { border-radius: 0; border-left: none; border-right: none; }
+      .stat-item { padding: 16px 20px; border-right: none; border-bottom: 1px solid var(--border); }
+      .demo-response { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+
+    /* ── Animations ── */
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.5s; }
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav>
+  <div class="nav-logo">Prop<span>OS</span> IQ</div>
+  <div class="nav-links">
+    <a href="#solution">Solution</a>
+    <a href="#customers">Who It's For</a>
+    <a href="#data">Data</a>
+    <a href="#how">How It Works</a>
+    <a href="#demo" class="nav-cta">Request Demo</a>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-tag fade-up">Live · England-wide · 35,000+ LSOAs</div>
+
+  <h1 class="fade-up delay-1">
+    <span class="line1">UK Property</span>
+    <span class="line2">Intelligence.</span>
+  </h1>
+
+  <p class="hero-sub fade-up delay-2">
+    <strong>One natural language query</strong> replaces hours of analyst work.
+    Lender risk, investment scoring, rental compliance and planning intelligence — instant, grounded, decision-ready.
+  </p>
+
+  <div class="hero-actions fade-up delay-3">
+    <a href="#demo" class="btn-primary">Request a Demo</a>
+    <a href="#solution" class="btn-ghost">See How It Works</a>
+  </div>
+
+  <div class="stats fade-up delay-4">
+    <div class="stat-item">
+      <div class="stat-value">30M+</div>
+      <div class="stat-label">PPD Transactions</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">35K+</div>
+      <div class="stat-label">LSOAs Covered</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">17+</div>
+      <div class="stat-label">Data Sources</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">41M+</div>
+      <div class="stat-label">OS UPRNs</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">14</div>
+      <div class="stat-label">Scoring Dimensions</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">4</div>
+      <div class="stat-label">Risk Models</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Problem ── -->
+<section class="problem" id="problem">
+  <div class="container">
+    <div class="section-tag">The Problem</div>
+    <h2 class="section-title">Every Property Decision<br>Requires Manual Research.</h2>
+    <p class="section-sub">
+      The UK mortgage market processes 1.5M+ applications per year. Every one requires manual site research.
+      That's billions in analyst hours — and data that goes stale the moment it's produced.
+    </p>
+    <div class="problem-grid">
+      <div class="problem-cell">
+        <div class="problem-icon">📄</div>
+        <h3>Static Site Packs</h3>
+        <p>Site packs cost £300+ per site, take days to produce, and go stale immediately. No way to run them at portfolio scale.</p>
+      </div>
+      <div class="problem-cell">
+        <div class="problem-icon">🗂️</div>
+        <h3>Siloed Data</h3>
+        <p>Flood, geology, planning, crime, schools — all in separate systems, each requiring a different login and specialist knowledge to interpret.</p>
+      </div>
+      <div class="problem-cell">
+        <div class="problem-icon">🧠</div>
+        <h3>No Reasoning Layer</h3>
+        <p>Raw data without interpretation. A lender still needs an analyst to say what the flood zone percentage means for a mortgage offer.</p>
+      </div>
+      <div class="problem-cell">
+        <div class="problem-icon">⏱️</div>
+        <h3>Slow Decisions</h3>
+        <p>Development appraisals and mortgage underwriting delayed by hours or days of desk research that should take seconds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Solution ── -->
+<section id="solution" style="background: var(--navy);">
+  <div class="container">
+    <div class="section-tag">The Solution</div>
+    <h2 class="section-title">One Query.<br>Instant Intelligence.</h2>
+    <p class="section-sub">
+      PropOS IQ replaces site packs, analyst research, AVM subscriptions and underwriting checks
+      with a single natural language interface backed by 17+ statutory UK data sources.
+    </p>
+    <div class="demo-box">
+      <div class="demo-bar">
+        <div class="demo-dot" style="background:#ff5f57;"></div>
+        <div class="demo-dot" style="background:#ffbd2e;"></div>
+        <div class="demo-dot" style="background:#28c840;"></div>
+        <span style="font-family:var(--mono);font-size:11px;color:var(--text3);margin-left:8px;">PropOS IQ — Property Intelligence</span>
+      </div>
+      <div class="demo-content">
+        <div class="demo-query">What is the lender risk and investment potential for WF1 1AB?</div>
+        <div class="demo-response">
+          <div class="demo-card">
+            <div class="demo-card-label">Investment Score</div>
+            <div class="demo-card-value c-amber">54.3</div>
+            <div class="demo-card-sub">Grade C · Moderate opportunity</div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-label">Lender Risk Score</div>
+            <div class="demo-card-value c-green">19.7</div>
+            <div class="demo-card-sub">Grade A · Very Low Risk</div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-label">AVM Median Price</div>
+            <div class="demo-card-value c-cyan">£128K</div>
+            <div class="demo-card-sub">UNDERVALUED signal · Rising trend</div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-label">Opportunity Grade</div>
+            <div class="demo-card-value c-amber">MODERATE</div>
+            <div class="demo-card-sub">No hard risk flags raised</div>
+          </div>
+        </div>
+        <div style="margin-top:1.25rem;padding:1rem;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--text2);line-height:1.7;">
+          <strong style="color:var(--text);font-family:var(--mono);font-size:11px;letter-spacing:0.06em;">LENDER RISK ASSESSMENT:</strong><br>
+          WF1 1AB scores 19.72, Grade A — very low physical risk. Geology risk is driven by moderate shrink-swell clay across the Wakefield LSOA. No flood exposure. No hard flags raised. CON29M coal mining search recommended given coalfield consultation area designation.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Customers ── -->
+<section class="customers" id="customers">
+  <div class="container">
+    <div class="section-tag">Who It's For</div>
+    <h2 class="section-title">Built For The<br>People Who Decide.</h2>
+    <p class="section-sub">
+      PropOS IQ serves every professional who makes decisions about UK property at scale —
+      from mortgage underwriters to planning teams to portfolio landlords.
+    </p>
+    <div class="segment-grid">
+      <div class="segment-card s1">
+        <div class="segment-icon">🏦</div>
+        <h3>Mortgage Lenders</h3>
+        <p>Replace manual underwriting checks with automated, graded risk scores. Screen entire BTL portfolios for EPC compliance, flood exposure and planning constraints in seconds.</p>
+        <ul class="segment-bullets">
+          <li>Lender risk score A–E with hard flags</li>
+          <li>Geology, flood, contamination, UXO</li>
+          <li>Coal mining CON29M alerts</li>
+          <li>Green mortgage EPC eligibility screening</li>
+        </ul>
+      </div>
+      <div class="segment-card s2">
+        <div class="segment-icon">🏗️</div>
+        <h3>Property Developers</h3>
+        <p>Surface PRIME investment opportunities before competitors. AVM valuation signals, HDT planning context and brownfield site intelligence — all from one query.</p>
+        <ul class="segment-bullets">
+          <li>PRIME / STRONG / MODERATE opportunity grades</li>
+          <li>HDT planning context and local plan status</li>
+          <li>Article 4, conservation area constraints</li>
+          <li>Deprivation trajectory and regeneration signals</li>
+        </ul>
+      </div>
+      <div class="segment-card s3">
+        <div class="segment-icon">🏘️</div>
+        <h3>Housing Associations</h3>
+        <p>Understand Decent Homes compliance risk, Awaab's Law exposure and rental compliance at LSOA level. Plan retrofit programmes with data, not intuition.</p>
+        <ul class="segment-bullets">
+          <li>EPC band distribution and F/G flag</li>
+          <li>Pre-1919 stock age and damp risk proxy</li>
+          <li>Rental compliance score 0–100</li>
+          <li>Deprivation, healthcare and schools access</li>
+        </ul>
+      </div>
+      <div class="segment-card s4">
+        <div class="segment-icon">🔑</div>
+        <h3>Landlords &amp; Agents</h3>
+        <p>Assess rental compliance risk before you buy or let. EPC compliance, Renters Reform Act exposure, selective licensing and ASB risk — all in one query.</p>
+        <ul class="segment-bullets">
+          <li>Rental compliance score A–E</li>
+          <li>EPC F/G flag — unlettable stock alert</li>
+          <li>Renters Reform &amp; Awaab's Law exposure</li>
+          <li>Crime percentile and ASB rate</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Data ── -->
+<section class="data-section" id="data">
+  <div class="container">
+    <div class="section-tag">Data Infrastructure</div>
+    <h2 class="section-title">17+ Statutory<br>UK Data Sources.</h2>
+    <p class="section-sub">
+      Every data point traces to a named statutory source. No estimates, no interpolation.
+      If it's not in the data, PropOS IQ says so.
+    </p>
+    <div class="data-grid">
+      <div class="data-cell">
+        <div class="data-source">HMLR</div>
+        <h4>Price Paid Data</h4>
+        <p>30M+ transactions, 1995–present</p>
+      </div>
+      <div class="data-cell">
+        <div class="data-source">BGS</div>
+        <h4>GeoSure Geology</h4>
+        <p>Shrink-swell, landslide, radon, mining</p>
+      </div>
+      <div class="data-cell">
+        <div class="data-source">EA</div>
+        <h4>NaFRA2 Flood Risk</h4>
+        <p>Flood Zones 2 &amp; 3, surface water</p>
+      </div>
+      <div class="data-cell">
+        <div class="data-source">Natural England</div>
+        <h4>Environmental</h4>
+        <p>ALC, SSSI, AONB, ancient woodland</p>
+      </div>
+      <div class="data-cell">
+        <div class="data-source">HMLR CCOD/OCOD</div>
+        <h4>Ownership Data</h4>
+        <p>4.4M corporate &amp; overseas titles</p>
+      </div>
+      <div class="data-cell">
+        <div class="data-source">Historic England</div>
+        <h4>Heritage</h4>
+        <p>Listed buildings, scheduled monuments</p>
+      </div>
+      <div class="data-cell">
+        <div class="data-source">Coal Authority</div>
+        <h4>Mining Risk</h4>
+        <p>Coalfield consultation areas</p>
+      </div>
+      <div class="data-cell">
+        <div class="data-source">Planning.data.gov.uk</div>
+        <h4>Planning Context</h4>
+        <p>HDT, local plan status, Article 4</p>
+      </div>
+      <div class="data-cell">
+        <div class="data-source">ONS Census 2021</div>
+        <h4>Demographics</h4>
+        <p>Tenure, deprivation, employment</p>
+      </div>
+      <div class="data-cell">
+        <div class="data-source">MHCLG</div>
+        <h4>EPC Register</h4>
+        <p>28.6M energy performance certificates</p>
+      </div>
+      <div class="data-cell">
+        <div class="data-source">Ofcom 2025</div>
+        <h4>Connectivity</h4>
+        <p>Superfast, full fibre, 5G coverage</p>
+      </div>
+      <div class="data-cell">
+        <div class="data-source">OS Open UPRN</div>
+        <h4>Property Reference</h4>
+        <p>41M+ unique property identifiers</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How it works ── -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-tag">How It Works</div>
+    <h2 class="section-title">From Query<br>To Decision.</h2>
+    <p class="section-sub">
+      PropOS IQ combines rule-based routing with large language model reasoning
+      to guarantee grounded, accurate answers — every output traceable to its statutory source.
+    </p>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <h4>Natural Language Query</h4>
+        <p>User types in plain English — no training required. Postcode, region or intent.</p>
+        <div class="flow-tech">No training required · Plain English</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <h4>Intent Detection</h4>
+        <p>Deterministic routing classifies intent across 40+ query types without an LLM — zero hallucination risk at the routing layer.</p>
+        <div class="flow-tech">Deterministic · No hallucination risk</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <h4>Tool Selection</h4>
+        <p>Our AI engine selects from 21 specialist data tools autonomously — combining multiple sources when a question spans dimensions.</p>
+        <div class="flow-tech">Multi-tool · Agentic reasoning</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <h4>PostGIS Retrieval</h4>
+        <p>Spatial queries across 17+ statutory datasets. LSOA-level precision, sub-second response time across all of England.</p>
+        <div class="flow-tech">Sub-second · LSOA precision · England-wide</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">5</div>
+        <h4>Grounded Answer</h4>
+        <p>AI narrates findings in plain English with score cards and risk grades. Every figure is grounded in source data — never fabricated.</p>
+        <div class="flow-tech">Grounded · Auditable · Decision-ready</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section" id="demo">
+  <div class="container">
+    <h2>Ready To See<br><span>PropOS IQ</span> In Action?</h2>
+    <p>
+      Book a live demo. We'll run queries against your actual postcodes
+      so you can see the data that matters to your team.
+    </p>
+    <div class="demo-form">
+      <input type="email" class="demo-input" placeholder="your@email.com">
+      <a href="mailto:kuldip@landstrata.ai?subject=PropOS IQ Demo Request" class="btn-primary">Request Demo →</a>
+    </div>
+    <p style="margin-top:1.5rem;font-size:12px;color:var(--text3);">
+      Or email us directly at
+      <a href="mailto:kuldip@landstrata.ai" style="color:var(--cyan);text-decoration:none;">kuldip@landstrata.ai</a>
+    </p>
+  </div>
+</section>
+
+<!-- ── Footer ── */
+<footer>
+  <div class="footer-logo">Prop<span>OS</span> IQ <span style="color:var(--text3);font-family:var(--sans);font-size:13px;font-weight:300;">by Landstrata Limited</span></div>
+  <div class="footer-links">
+    <a href="#problem">Product</a>
+    <a href="#data">Data</a>
+    <a href="#demo">Demo</a>
+    <a href="mailto:kuldip@landstrata.ai">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Landstrata Limited · landstrata.co.uk</div>
+</footer>
+
+<script>
+  // Intersection observer for fade-up on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.style.opacity = '1';
+        el.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.problem-cell, .segment-card, .data-cell, .flow-step').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+
+  // Demo input — on enter, open mailto
+  document.querySelector('.demo-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const email = e.target.value.trim();
+      if (email) window.location.href = `mailto:kuldip@landstrata.ai?subject=PropOS IQ Demo Request&body=My email: ${email}`;
+    }
+  });
+</script>
+</body>
+</html>
