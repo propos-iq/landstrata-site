@@ -1,5 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <!-- Top layer (cyan) -->
   <path d="M12 2L22 7L12 12L2 7L12 2Z" fill="#00d4ff"/>
-  <path d="M2 11L12 16L22 11" stroke="#00d4ff" stroke-width="1.5"/>
-  <path d="M2 15L12 20L22 15" stroke="#00d4ff" stroke-width="1.5"/>
+
+  <!-- Middle layer (white) -->
+  <path d="M2 11L12 16L22 11" stroke="#ffffff" stroke-width="1.8" fill="none"/>
+
+  <!-- Bottom layer (yellow) -->
+  <path d="M2 15L12 20L22 15" stroke="#e6a800" stroke-width="1.8" fill="none"/>
 </svg>
