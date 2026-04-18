@@ -57,32 +57,30 @@
 	  gap: 10px;
 	  text-decoration: none;
 	  cursor: pointer;
+	  font-family: var(--sans);
+	  font-size: 15px;
+	  font-weight: 700;
+	  letter-spacing: 0.08em;
 	}
+
 	.nav-logo-icon {
-	  width: 26px;
-	  height: 26px;
-	  flex-shrink: 0;
+	  width: 24px;
+	  height: 24px;
 	}
-	.nav-logo-text {
-	  font-family: var(--display);
-	  font-size: 28px;
-	  line-height: 1;
-	  letter-spacing: 0.05em;
-	  display: inline-flex;
-	  align-items: center;
-	}
-	
+
 	.nav-logo-land {
 	  color: #ffffff;
 	}
 
 	.nav-logo-strata {
 	  color: var(--cyan);
-	  margin-left: 2px;
+	  margin-left: 1px;
 	}
 
 	.nav-logo:hover {
-	  opacity: 0.92;
+	  opacity: 0.9;
+	  transform: translateY(-1px);
+	  transition: all 0.2s ease;
 	}
 
 
@@ -496,11 +494,17 @@
 <!-- ── Nav ── -->
 <nav>
 	<a href="#top" class="nav-logo">
-	  <svg class="nav-logo-icon" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+	  <svg class="nav-logo-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+		<!-- Top layer (cyan) -->
 		<path d="M12 2L22 7L12 12L2 7L12 2Z" fill="#00d4ff"/>
-		<path d="M2 11L12 16L22 11" stroke="#00d4ff" stroke-width="1.5" fill="none"/>
-		<path d="M2 15L12 20L22 15" stroke="#00d4ff" stroke-width="1.5" fill="none"/>
+
+		<!-- Middle layer (white) -->
+		<path d="M2 11L12 16L22 11" stroke="#ffffff" stroke-width="1.8" fill="none"/>
+
+		<!-- Bottom layer (yellow) -->
+		<path d="M2 15L12 20L22 15" stroke="#e6a800" stroke-width="1.8" fill="none"/>
 	  </svg>
+
 	  <span class="nav-logo-text">
 		<span class="nav-logo-land">LAND</span><span class="nav-logo-strata">STRATA</span>
 	  </span>
