@@ -7,6 +7,7 @@
   <meta name="description" content="Landstrata builds AI-powered property intelligence infrastructure. PropOS IQ turns UK property data into decision-ready risk, planning and investment insight.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <style>
     :root {
       --navy:   #080d14;
@@ -50,15 +51,22 @@
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
-    .nav-logo {
-      font-family: var(--display);
-      font-size: 22px;
-      letter-spacing: 0.05em;
-      color: var(--text);
-      text-decoration: none;
-      display: inline-block;
-      cursor: pointer;
-    }
+	.nav-logo {
+	  display: flex;
+	  align-items: center;
+	  gap: 10px;
+	  text-decoration: none;
+	  color: var(--text);
+	  font-family: var(--display);
+	  font-size: 22px;
+	  letter-spacing: 0.05em;
+	  cursor: pointer;
+	}
+	.nav-logo:hover svg {
+	  transform: translateY(-1px);
+	  opacity: 0.9;
+	  transition: all 0.2s ease;
+	}
     .nav-logo span { color: var(--cyan); }
     .nav-links { display: flex; align-items: center; gap: 2.5rem; }
     .nav-links a {
@@ -463,7 +471,15 @@
 
 <!-- ── Nav ── -->
 <nav>
-  <a href="#top" class="nav-logo">Land<span>strata</span></a>
+  <a href="#top" class="nav-logo">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2L22 7L12 12L2 7L12 2Z" fill="#00d4ff"/>
+      <path d="M2 11L12 16L22 11" stroke="#00d4ff" stroke-width="1.5"/>
+      <path d="M2 15L12 20L22 15" stroke="#00d4ff" stroke-width="1.5"/>
+    </svg>
+    <span>Land<span style="color:var(--cyan)">strata</span></span>
+  </a>
+
   <div class="nav-links">
     <a href="#solution">Solution</a>
     <a href="#customers">Who It's For</a>
