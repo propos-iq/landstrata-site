@@ -55,6 +55,9 @@
       font-size: 22px;
       letter-spacing: 0.05em;
       color: var(--text);
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
     }
     .nav-logo span { color: var(--cyan); }
     .nav-links { display: flex; align-items: center; gap: 2.5rem; }
@@ -456,11 +459,11 @@
     .delay-4 { animation-delay: 0.5s; }
   </style>
 </head>
-<body>
+<body id="top">
 
 <!-- ── Nav ── -->
 <nav>
-  <a href="/" class="nav-logo">Land<span>strata</span></a>
+  <a href="#top" class="nav-logo">Land<span>strata</span></a>
   <div class="nav-links">
     <a href="#solution">Solution</a>
     <a href="#customers">Who It's For</a>
