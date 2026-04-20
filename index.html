@@ -8,6 +8,25 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FP86J166B5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FP86J166B5');
+
+    function trackEvent(name, category, label) {
+      if (typeof gtag === 'function') {
+        gtag('event', name, {
+          event_category: category,
+          event_label: label
+        });
+      }
+    }
+  </script>
+
   <style>
     :root {
       --navy:   #080d14;
@@ -512,7 +531,7 @@
     <a href="#customers">Who It's For</a>
     <a href="#data">Data</a>
     <a href="#how">How It Works</a>
-    <a href="#demo" class="nav-cta">Book a Demo</a>
+    <a href="#demo" class="nav-cta" onclick="trackEvent('click_book_demo','engagement','nav_book_demo')">Book a Demo</a>
   </div>
 </nav>
 
@@ -536,8 +555,8 @@
   </p>
 
   <div class="hero-actions fade-up delay-3">
-    <a href="#demo" class="btn-primary">Book a Demo</a>
-    <a href="#solution" class="btn-ghost">See the Platform</a>
+    <a href="#demo" class="btn-primary" onclick="trackEvent('click_book_demo','engagement','hero_book_demo')">Book a Demo</a>
+    <a href="#solution" class="btn-ghost" onclick="trackEvent('click_see_platform','engagement','hero_see_platform')">See the Platform</a>
   </div>
 
   <div class="stats fade-up delay-4">
@@ -876,11 +895,15 @@
     </p>
     <div class="demo-form">
       <input type="email" class="demo-input" placeholder="your@email.com">
-      <a href="mailto:info@landstrata.co.uk?subject=PropOS IQ Demo Request" class="btn-primary">Request Demo →</a>
+      <a href="mailto:info@landstrata.co.uk?subject=PropOS IQ Demo Request"
+         class="btn-primary"
+         onclick="trackEvent('click_request_demo_email','engagement','footer_demo_request')">Request Demo →</a>
     </div>
     <p style="margin-top:1.5rem;font-size:12px;color:var(--text3);">
       Or email us directly at
-      <a href="mailto:info@landstrata.co.uk" style="color:var(--cyan);text-decoration:none;">info@landstrata.co.uk</a>
+      <a href="mailto:info@landstrata.co.uk"
+         style="color:var(--cyan);text-decoration:none;"
+         onclick="trackEvent('click_email_link','engagement','footer_email')">info@landstrata.co.uk</a>
     </p>
   </div>
 </section>
@@ -890,8 +913,8 @@
   <div class="footer-links">
     <a href="#solution">Platform</a>
     <a href="#data">Data</a>
-    <a href="#demo">Demo</a>
-    <a href="mailto:info@landstrata.co.uk">Contact</a>
+    <a href="#demo" onclick="trackEvent('click_book_demo','engagement','footer_demo_anchor')">Demo</a>
+    <a href="mailto:info@landstrata.co.uk" onclick="trackEvent('click_email_link','engagement','footer_contact_email')">Contact</a>
   </div>
   <div class="footer-copy">Landstrata Ltd · Company No. 17161151 · Registered in England & Wales · landstrata.co.uk</div>
 </footer>
@@ -916,7 +939,10 @@
   document.querySelector('.demo-input').addEventListener('keydown', e => {
     if (e.key === 'Enter') {
       const email = e.target.value.trim();
-      if (email) window.location.href = `mailto:info@landstrata.co.uk?subject=PropOS IQ Demo Request&body=My email: ${email}`;
+      if (email) {
+        trackEvent('submit_demo_email','engagement','demo_input_enter');
+        window.location.href = `mailto:info@landstrata.co.uk?subject=PropOS IQ Demo Request&body=My email: ${email}`;
+      }
     }
   });
 </script>
