@@ -444,21 +444,6 @@
       max-width: 560px; margin: 0 auto 2.5rem;
       line-height: 1.7; font-weight: 300;
     }
-    .demo-form {
-      display: flex; gap: 12px; max-width: 480px;
-      margin: 0 auto; flex-wrap: wrap; justify-content: center;
-    }
-    .demo-input {
-      flex: 1; min-width: 240px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--border2);
-      border-radius: 8px; color: var(--text);
-      font-family: var(--sans); font-size: 14px;
-      padding: 13px 16px; outline: none;
-      transition: border-color 0.2s;
-    }
-    .demo-input::placeholder { color: var(--text3); }
-    .demo-input:focus { border-color: var(--cyan); }
 
     footer {
       padding: 3rem 2rem;
@@ -531,7 +516,7 @@
     <a href="#customers">Who It's For</a>
     <a href="#data">Data</a>
     <a href="#how">How It Works</a>
-    <a href="#demo" class="nav-cta" onclick="trackEvent('click_book_demo','engagement','nav_book_demo')">Book a Demo</a>
+    <a href="https://calendly.com/kuldip-landstrata/15-minute-meeting" target="_blank" rel="noopener" class="nav-cta" onclick="trackEvent('click_book_demo','engagement','nav_book_demo')">Book a Demo</a>
   </div>
 </nav>
 
@@ -551,11 +536,11 @@
   </p>
 
   <p class="hero-proof fade-up delay-2">
-    Built on 17+ statutory UK datasets · 34,000+ neighbourhoods covered
+    Built on 17+ statutory UK datasets · 34,000+ neighbourhoods covered · Geovation Accelerator 2026
   </p>
 
   <div class="hero-actions fade-up delay-3">
-    <a href="#demo" class="btn-primary" onclick="trackEvent('click_book_demo','engagement','hero_book_demo')">Book a Demo</a>
+    <a href="https://calendly.com/kuldip-landstrata/15-minute-meeting" target="_blank" rel="noopener" class="btn-primary" onclick="trackEvent('click_book_demo','engagement','hero_book_demo')">Book a Demo</a>
     <a href="#solution" class="btn-ghost" onclick="trackEvent('click_see_platform','engagement','hero_see_platform')">See the Platform</a>
   </div>
 
@@ -890,17 +875,23 @@
   <div class="container">
     <h2>See How <span>Landstrata</span><br>Turns Data Into Decisions.</h2>
     <p>
-      Book a live demo of PropOS IQ and see how Landstrata can help your team make faster,
-      sharper property decisions with AI-driven, evidence-based intelligence.
+      Book 15 minutes with the founder. We'll demo PropOS IQ live on a postcode you choose —
+      no slides, no preparation needed, just the actual product answering your real questions.
     </p>
-    <div class="demo-form">
-      <input type="email" class="demo-input" placeholder="your@email.com">
-      <a href="mailto:info@landstrata.co.uk?subject=PropOS IQ Demo Request"
+    <div style="display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <a href="https://calendly.com/kuldip-landstrata/15-minute-meeting"
+         target="_blank" rel="noopener"
          class="btn-primary"
-         onclick="trackEvent('click_request_demo_email','engagement','footer_demo_request')">Request Demo →</a>
+         style="padding: 16px 40px; font-size: 16px;"
+         onclick="trackEvent('click_book_demo','engagement','footer_calendly')">
+         Book 15 Minutes →
+      </a>
     </div>
-    <p style="margin-top:1.5rem;font-size:12px;color:var(--text3);">
-      Or email us directly at
+    <p style="margin-top:1.5rem;font-size:13px;color:var(--text3);">
+      Pick a time that suits you · No prep required · Bring a postcode you'd actually run
+    </p>
+    <p style="margin-top:1rem;font-size:12px;color:var(--text3);">
+      Or email
       <a href="mailto:info@landstrata.co.uk"
          style="color:var(--cyan);text-decoration:none;"
          onclick="trackEvent('click_email_link','engagement','footer_email')">info@landstrata.co.uk</a>
@@ -913,10 +904,10 @@
   <div class="footer-links">
     <a href="#solution">Platform</a>
     <a href="#data">Data</a>
-    <a href="#demo" onclick="trackEvent('click_book_demo','engagement','footer_demo_anchor')">Demo</a>
+    <a href="https://calendly.com/kuldip-landstrata/15-minute-meeting" target="_blank" rel="noopener" onclick="trackEvent('click_book_demo','engagement','footer_demo_anchor')">Demo</a>
     <a href="mailto:info@landstrata.co.uk" onclick="trackEvent('click_email_link','engagement','footer_contact_email')">Contact</a>
   </div>
-  <div class="footer-copy">Landstrata Ltd · Company No. 17161151 · Registered in England & Wales · landstrata.co.uk</div>
+  <div class="footer-copy">Landstrata Ltd · Company No. 17161151 · Registered in England &amp; Wales · landstrata.co.uk</div>
 </footer>
 
 <script>
@@ -934,16 +925,6 @@
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
-  });
-
-  document.querySelector('.demo-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      const email = e.target.value.trim();
-      if (email) {
-        trackEvent('submit_demo_email','engagement','demo_input_enter');
-        window.location.href = `mailto:info@landstrata.co.uk?subject=PropOS IQ Demo Request&body=My email: ${email}`;
-      }
-    }
   });
 </script>
 </body>
