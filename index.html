@@ -100,13 +100,19 @@
     }
     .nav-links a:hover { color: var(--cyan); }
     .nav-cta {
-      background: var(--cyan); color: var(--navy);
-      border: none; border-radius: 6px;
+      background: rgba(0,212,255,0.08);
+      color: var(--cyan);
+      border: 1px solid rgba(0,212,255,0.45);
+      border-radius: 6px;
       padding: 9px 22px; font-size: 13px; font-weight: 600;
       font-family: var(--sans); cursor: pointer; transition: all 0.2s;
       text-decoration: none; letter-spacing: 0.02em;
     }
-    .nav-cta:hover { background: #33ddff; transform: translateY(-1px); }
+    .nav-cta:hover {
+      background: rgba(0,212,255,0.16);
+      border-color: var(--cyan);
+      transform: translateY(-1px);
+    }
 
     .hero {
       min-height: 100vh;
@@ -177,14 +183,34 @@
       justify-content: center; margin-bottom: 4rem;
     }
     .btn-primary {
-      background: var(--cyan); color: var(--navy);
-      border: none; border-radius: 8px;
+      background: rgba(0,212,255,0.08);
+      color: var(--cyan);
+      border: 1px solid rgba(0,212,255,0.45);
+      border-radius: 8px;
       padding: 14px 32px; font-size: 15px; font-weight: 600;
       font-family: var(--sans); cursor: pointer;
       text-decoration: none; transition: all 0.2s;
       letter-spacing: 0.02em;
     }
-    .btn-primary:hover { background: #33ddff; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,212,255,0.3); }
+    .btn-primary:hover {
+      background: rgba(0,212,255,0.16);
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,212,255,0.15);
+    }
+    /* The bottom CTA section is the strongest conversion moment — bring
+       back the filled cyan there, but only there. One bright button on
+       the page reads as "premium accent"; four bright buttons reads as
+       "blinding". */
+    .cta-section .btn-primary {
+      background: var(--cyan);
+      color: var(--navy);
+      border: 1px solid var(--cyan);
+    }
+    .cta-section .btn-primary:hover {
+      background: #33ddff;
+      box-shadow: 0 8px 32px rgba(0,212,255,0.3);
+    }
     .btn-ghost {
       background: transparent; color: var(--text2);
       border: 1px solid var(--border2); border-radius: 8px;
