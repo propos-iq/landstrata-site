@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="canonical" href="https://landstrata.co.uk/collateral-risk/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Property Risk Intelligence for Mortgage Lenders | Landstrata</title>
-  <meta name="description" content="Landstrata provides residential property risk intelligence for UK mortgage lenders. PropOS IQ assesses coal mining, flood, ground stability, contamination and planning risk at UPRN level alongside your existing AVM or valuation.">
+  <meta name="description" content="Landstrata provides residential property risk intelligence for UK mortgage lenders. PropOS IQ assesses coal mining, flood, ground stability, contamination, planning and corporate ownership risk at UPRN level alongside your existing AVM or valuation.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <link rel="canonical" href="https://landstrata.co.uk/">
 
@@ -17,7 +16,7 @@
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Property Risk Intelligence for Mortgage Lenders | Landstrata">
-  <meta name="twitter:description" content="PropOS IQ assesses coal mining, flood, ground stability, contamination and planning risk at UPRN level for mortgage lenders.">
+  <meta name="twitter:description" content="PropOS IQ assesses coal mining, flood, ground stability, contamination, planning and corporate ownership risk at UPRN level for mortgage lenders.">
 
   <script type="application/ld+json">
   {
@@ -44,7 +43,7 @@
         "name": "PropOS IQ",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web",
-        "description": "An independent UPRN-level residential collateral-risk case file for UK mortgage lenders, assessing statutory, environmental and location-specific property risk alongside an existing valuation or AVM.",
+        "description": "An independent UPRN-level residential collateral-risk case file for UK mortgage lenders, assessing statutory, environmental, corporate ownership and location-specific property risk alongside an existing valuation or AVM.",
         "publisher": { "@id": "https://landstrata.co.uk/#organization" }
       }
     ]
@@ -139,7 +138,7 @@
       transition: all 0.2s ease;
     }
 
-    .nav-links { display: flex; align-items: center; gap: 2.5rem; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
     .nav-links a {
       font-size: 14px; color: var(--text2); text-decoration: none;
       font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s;
@@ -317,6 +316,10 @@
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 18px; margin-top: 2.25rem;
     }
+    .example-grid.single {
+      grid-template-columns: minmax(0, 620px);
+      justify-content: center;
+    }
     .example-card {
       border: 1px solid var(--border);
       border-radius: 12px; overflow: hidden; background: var(--navy);
@@ -349,7 +352,11 @@
       background: var(--navy2);
       padding: 2.5rem;
     }
-    .problem-icon { font-size: 28px; margin-bottom: 1rem; }
+    .problem-marker {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--cyan); letter-spacing: 0.1em;
+      margin-bottom: 0.9rem;
+    }
     .problem-cell h3 {
       font-family: var(--display); font-size: 26px;
       letter-spacing: 0.02em; color: var(--text);
@@ -423,7 +430,11 @@
     .segment-card.s3::before { background: var(--amber); }
     .segment-card.s4::before { background: var(--red); }
     .segment-card:hover { border-color: var(--border2); transform: translateY(-4px); }
-    .segment-icon { font-size: 32px; margin-bottom: 1rem; }
+    .segment-marker {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text3); letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
     .segment-card h3 {
       font-family: var(--display); font-size: 22px;
       letter-spacing: 0.02em; margin-bottom: 0.5rem;
@@ -524,7 +535,7 @@
       letter-spacing: 0.05em;
     }
     .footer-logo span { color: var(--cyan); }
-    .footer-links { display: flex; gap: 2rem; }
+    .footer-links { display: flex; gap: 1.6rem; flex-wrap: wrap; }
     .footer-links a {
       font-size: 12px; color: var(--text3); text-decoration: none;
       transition: color 0.2s; letter-spacing: 0.03em;
@@ -532,8 +543,14 @@
     .footer-links a:hover { color: var(--cyan); }
     .footer-copy { font-size: 12px; color: var(--text3); }
 
+    @media (max-width: 1080px) {
+      .nav-links { gap: 1.4rem; }
+      .nav-links a { font-size: 13px; }
+    }
+
     @media (max-width: 900px) {
       .example-grid { grid-template-columns: 1fr; }
+      .example-grid.single { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 768px) {
@@ -550,6 +567,7 @@
       .stat-item { padding: 16px 20px; border-right: none; border-bottom: 1px solid var(--border); }
       .demo-response { grid-template-columns: 1fr 1fr; }
       footer { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
     }
 
     .fade-up {
@@ -564,10 +582,9 @@
     .delay-3 { animation-delay: 0.3s; }
     .delay-4 { animation-delay: 0.5s; }
 
-
     /* SEO-focused content additions */
     .risk-links {
-      display: grid; grid-template-columns: repeat(5, 1fr);
+      display: grid; grid-template-columns: repeat(6, 1fr);
       gap: 12px; margin-top: 2.5rem;
     }
     .risk-link {
@@ -603,12 +620,12 @@
     .faq-item p { font-size: 14px; color: var(--text2); line-height: 1.7; }
 
     @media (max-width: 900px) {
-      .risk-links { grid-template-columns: repeat(2, 1fr); }
+      .risk-links { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 768px) {
-      .risk-links, .faq-grid { grid-template-columns: 1fr; }
+      .risk-links { grid-template-columns: repeat(2, 1fr); }
+      .faq-grid { grid-template-columns: 1fr; }
     }
-
   </style>
 </head>
 <body id="top">
@@ -629,6 +646,7 @@
     <a href="#solution">Platform</a>
     <a href="#lenders">For Lenders</a>
     <a href="#property-risk">Property Risk</a>
+    <a href="#ownership">Ownership</a>
     <a href="#data">Data</a>
     <a href="#how">How It Works</a>
     <a href="https://calendly.com/kuldip-landstrata/15-minute-meeting" target="_blank" rel="noopener" class="nav-cta" onclick="trackEvent('click_book_demo','engagement','nav_book_demo')">Book a Demo</a>
@@ -648,11 +666,11 @@
   </h1>
 
   <p class="hero-sub fade-up delay-2">
-    <strong>PropOS IQ by Landstrata</strong> is an independent residential collateral-risk case file for UK mortgage lenders. It assesses coal mining, flood, ground stability, contamination and planning risk at UPRN level — with evidence, provenance and an auditable recommended action — alongside your existing valuation or AVM.
+    <strong>PropOS IQ by Landstrata</strong> is an independent residential collateral-risk case file for UK mortgage lenders. It assesses coal mining, flood, ground stability, contamination, planning and corporate ownership risk at UPRN level — with evidence, provenance and an auditable recommended action — alongside your existing valuation or AVM.
   </p>
 
   <p class="hero-proof fade-up delay-2">
-    Independent · UPRN-level · Deterministic &amp; auditable · Built on 17+ UK datasets · Geovation Accelerator 2026
+    Independent · UPRN-level · Deterministic &amp; auditable · Built on 17+ UK datasets
   </p>
 
   <div class="hero-actions fade-up delay-3">
@@ -693,18 +711,19 @@
     <div class="section-tag">Residential Collateral Risk</div>
     <h2 class="section-title" id="risk-example-title">The Risk Beneath<br>The Valuation.</h2>
     <p class="section-sub">
-      PropOS IQ brings property value and statutory risk into one evidence-backed case file. It does not replace the lender's AVM, valuation panel or policy; it gives the underwriter an independent second lens on risks that sit beneath the valuation.
+      PropOS IQ brings property value, statutory risk and registered ownership into one evidence-backed case file. It does not replace the lender's AVM, valuation panel or policy; it gives the underwriter an independent second lens on risks that sit beneath the valuation.
     </p>
 
     <div class="risk-links" aria-label="Property risk coverage">
-      <a class="risk-link" href="#coal-mining-risk"><strong>Coal Mining Risk</strong><span>Coal Authority evidence and CON29M workflow</span></a>
-      <a class="risk-link" href="#flood-risk"><strong>Flood Risk</strong><span>Property-level flood evidence for review</span></a>
-      <a class="risk-link" href="#ground-risk"><strong>Ground Stability</strong><span>Shrink-swell, landslide and geological context</span></a>
-      <a class="risk-link" href="#contamination-risk"><strong>Contamination</strong><span>Environmental and statutory land-risk context</span></a>
-      <a class="risk-link" href="#planning-risk"><strong>Planning Risk</strong><span>Planning constraints and location context</span></a>
+      <a class="risk-link" href="#coal-mining-risk"><strong>Coal Mining</strong><span>Coal Authority evidence and CON29M workflow</span></a>
+      <a class="risk-link" href="#further-coverage"><strong>Flood Risk</strong><span>Property-level flood evidence for review</span></a>
+      <a class="risk-link" href="#further-coverage"><strong>Ground Stability</strong><span>Shrink-swell, landslide and geological context</span></a>
+      <a class="risk-link" href="#further-coverage"><strong>Contamination</strong><span>Environmental and statutory land-risk context</span></a>
+      <a class="risk-link" href="#further-coverage"><strong>Planning</strong><span>Planning constraints and location context</span></a>
+      <a class="risk-link" href="#ownership"><strong>Ownership</strong><span>Freeholder status and registered title findings</span></a>
     </div>
 
-    <div class="example-grid">
+    <div class="example-grid single">
       <article class="example-card" id="coal-mining-risk">
         <div class="example-head">Coal Mining Risk — Mortgage Underwriting Scenario</div>
         <div class="example-body">
@@ -712,7 +731,7 @@
             <div class="example-metric">
               <div class="demo-card-label">Market Value (AVM)</div>
               <div class="demo-card-value c-cyan">£191.1K</div>
-              <div class="demo-card-sub">Confidence MEDIUM · 90% £133K–£258K</div>
+              <div class="demo-card-sub">Confidence MEDIUM</div>
             </div>
             <div class="example-metric">
               <div class="demo-card-label">Statutory Risk</div>
@@ -731,64 +750,109 @@
           </div>
         </div>
       </article>
+    </div>
 
-      <article class="example-card" id="flood-risk">
-        <div class="example-head">Flood Risk — Evidence Before Reliance</div>
+    <div class="sector-note" id="further-coverage">
+      <strong style="color:var(--text);">Wider coverage:</strong> the same evidence-and-action structure is applied to flood, ground stability, contamination and planning context, with each finding tied back to its source dataset and decision path.
+    </div>
+  </div>
+</section>
+
+<section id="ownership" style="background: var(--navy);" aria-labelledby="ownership-title">
+  <div class="container">
+    <div class="section-tag">Corporate Ownership Risk</div>
+    <h2 class="section-title" id="ownership-title">The Risk That Sits<br>On The Title.</h2>
+    <p class="section-sub">
+      A valuation describes the building. A search pack describes the ground. Neither tells the underwriter that the freeholder is in administration, that a receiver has been appointed, or that a third party holds a registered lease over the roof. PropOS IQ resolves the registered title behind the property and reads the proprietor's live corporate status — at the point of underwriting, not after completion.
+    </p>
+
+    <div class="example-grid">
+
+      <article class="example-card" id="freeholder-insolvency">
+        <div class="example-head">Freeholder Insolvency — Live Corporate Status</div>
         <div class="example-body">
           <div class="example-metrics">
             <div class="example-metric">
-              <div class="demo-card-label">Risk Question</div>
-              <div class="demo-card-value c-cyan">Flood</div>
-              <div class="demo-card-sub">Assess statutory and environmental evidence</div>
+              <div class="demo-card-label">Registered Proprietor</div>
+              <div class="demo-card-value c-red">In Administration</div>
+              <div class="demo-card-sub">Status asserted by Companies House</div>
             </div>
             <div class="example-metric">
-              <div class="demo-card-label">Evidence Layer</div>
-              <div class="demo-card-value c-amber">EA</div>
-              <div class="demo-card-sub">Flood-zone and surface-water context</div>
+              <div class="demo-card-label">Underwriter Exposure</div>
+              <div class="demo-card-value c-amber">Leasehold</div>
+              <div class="demo-card-sub">Service charge, management, lease enforcement</div>
             </div>
             <div class="example-metric">
-              <div class="demo-card-label">Underwriter Output</div>
-              <div class="demo-card-value c-cyan">Action</div>
-              <div class="demo-card-sub">Evidence-backed finding with provenance</div>
+              <div class="demo-card-label">Recommended Action</div>
+              <div class="demo-card-value c-cyan">Refer</div>
+              <div class="demo-card-sub">Confirm management arrangements before reliance</div>
             </div>
           </div>
           <div class="example-insight">
             <strong style="color:var(--text);font-family:var(--mono);font-size:11px;">UNDERWRITING INSIGHT:</strong><br>
-            PropOS IQ is designed to surface flood evidence alongside the property valuation so the lender can see the hazard, its source and the resulting action in the same review rather than reconcile disconnected outputs manually.
+            Where a leasehold property's freeholder is in administration, receivership or heading for strike-off, the lender's security is intact but the building's management is not. PropOS IQ surfaces the proprietor's status directly from the public register — no search pack, no ordering delay, no inference.
           </div>
         </div>
       </article>
 
-      <article class="example-card" id="ground-risk">
-        <div class="example-head">Ground Stability — Geological Risk Context</div>
+      <article class="example-card" id="roof-lease">
+        <div class="example-head">Roof &amp; Airspace Leases — Invisible To An AVM</div>
         <div class="example-body">
           <div class="example-metrics">
             <div class="example-metric">
-              <div class="demo-card-label">Risk Question</div>
-              <div class="demo-card-value c-cyan">Ground</div>
-              <div class="demo-card-sub">Shrink-swell, landslide and mining context</div>
+              <div class="demo-card-label">Title Finding</div>
+              <div class="demo-card-value c-amber">Plant Lease</div>
+              <div class="demo-card-sub">Third-party lease over roof or airspace</div>
             </div>
             <div class="example-metric">
-              <div class="demo-card-label">Evidence Layer</div>
-              <div class="demo-card-value c-amber">BGS</div>
-              <div class="demo-card-sub">GeoSure geological evidence</div>
+              <div class="demo-card-label">Why It Matters</div>
+              <div class="demo-card-value c-red">Binds</div>
+              <div class="demo-card-sub">Successors in title; lender criteria vary</div>
+            </div>
+            <div class="example-metric">
+              <div class="demo-card-label">Recommended Action</div>
+              <div class="demo-card-value c-cyan">Check Policy</div>
+              <div class="demo-card-sub">Confirm acceptability before offer</div>
+            </div>
+          </div>
+          <div class="example-insight">
+            <strong style="color:var(--text);font-family:var(--mono);font-size:11px;">UNDERWRITING INSIGHT:</strong><br>
+            Rent-a-roof solar leases from the feed-in tariff era bind successors in title, complicate re-roofing and resale, and are a known mortgageability problem where criteria differ between lenders. They sit on the registered title, are absent from standard search packs and are invisible to any valuation model. PropOS IQ identifies them from the title pattern rather than the proprietor's name.
+          </div>
+        </div>
+      </article>
+
+      <article class="example-card" id="owner-classification">
+        <div class="example-head">Proprietor Classification — Who Actually Owns It</div>
+        <div class="example-body">
+          <div class="example-metrics">
+            <div class="example-metric">
+              <div class="demo-card-label">Ownership Type</div>
+              <div class="demo-card-value c-cyan">Classified</div>
+              <div class="demo-card-sub">Housing association, developer, SPV, lessor</div>
+            </div>
+            <div class="example-metric">
+              <div class="demo-card-label">Corporate Detail</div>
+              <div class="demo-card-value c-amber">Verified</div>
+              <div class="demo-card-sub">Status, incorporation date, registered activity</div>
             </div>
             <div class="example-metric">
               <div class="demo-card-label">Decision Record</div>
               <div class="demo-card-value c-cyan">Auditable</div>
-              <div class="demo-card-sub">Finding, severity and provenance retained</div>
+              <div class="demo-card-sub">Source and finding retained per property</div>
             </div>
           </div>
           <div class="example-insight">
             <strong style="color:var(--text);font-family:var(--mono);font-size:11px;">UNDERWRITING INSIGHT:</strong><br>
-            Geological risk is separated from valuation rather than hidden inside a single score. The lender can see the evidence that triggered the finding and retain a deterministic record of how it was handled.
+            Corporate ownership is resolved to a real taxonomy rather than a generic company name, so the underwriter can distinguish a registered social landlord from a single-property SPV incorporated shortly before purchase. Every finding carries its source, and an unmatched proprietor is reported as unclassified rather than clean.
           </div>
         </div>
       </article>
+
     </div>
 
-    <div class="sector-note" id="contamination-risk">
-      <strong style="color:var(--text);">Additional coverage:</strong> PropOS IQ can also bring contamination and planning context into the same property-level review, with each finding tied back to its evidence source and decision path. <span id="planning-risk"></span>
+    <div class="sector-note">
+      <strong style="color:var(--text);">Built from public data.</strong> Ownership findings are derived from HM Land Registry corporate and overseas ownership data joined to the Companies House register at property level — returned in seconds, with the evidence retained alongside the finding.
     </div>
   </div>
 </section>
@@ -802,22 +866,22 @@
     </p>
     <div class="problem-grid">
       <div class="problem-cell">
-        <div class="problem-icon">📄</div>
+        <div class="problem-marker">01</div>
         <h3>Separate Reports</h3>
         <p>Valuation and property-risk evidence arrive through different workflows, leaving the decision maker to join the evidence together.</p>
       </div>
       <div class="problem-cell">
-        <div class="problem-icon">🗂️</div>
+        <div class="problem-marker">02</div>
         <h3>Siloed Property Data</h3>
-        <p>Coal mining, flood, geology, planning and environmental evidence sit across separate datasets and systems.</p>
+        <p>Coal mining, flood, geology, planning, ownership and environmental evidence sit across separate datasets and systems.</p>
       </div>
       <div class="problem-cell">
-        <div class="problem-icon">🧠</div>
+        <div class="problem-marker">03</div>
         <h3>No Common Decision Layer</h3>
         <p>Raw hazard data still needs to be interpreted in the context of the property, valuation and lender's underwriting process.</p>
       </div>
       <div class="problem-cell">
-        <div class="problem-icon">⏱️</div>
+        <div class="problem-marker">04</div>
         <h3>Manual Review</h3>
         <p>Exceptions and complex properties can require additional desk research, referrals and evidence gathering before a decision can be defended.</p>
       </div>
@@ -830,7 +894,7 @@
     <div class="section-tag">Property Risk Assessment for Mortgage Lenders</div>
     <h2 class="section-title" id="solution-title">One Evidence-Backed<br>Collateral-Risk Case File.</h2>
     <p class="section-sub">
-      PropOS IQ produces a UPRN-level residential collateral-risk assessment covering coal mining, flood, ground stability, contamination and planning risk. Findings are evidence-backed, severity-graded and tied to a recommended underwriter action — designed to sit alongside your existing valuation or AVM, not replace it.
+      PropOS IQ produces a UPRN-level residential collateral-risk assessment covering coal mining, flood, ground stability, contamination, planning and corporate ownership risk. Findings are evidence-backed, severity-graded and tied to a recommended underwriter action — designed to sit alongside your existing valuation or AVM, not replace it.
     </p>
     <div class="demo-box">
       <div class="demo-bar">
@@ -845,7 +909,7 @@
           <div class="demo-card">
             <div class="demo-card-label">Market Value (AVM)</div>
             <div class="demo-card-value c-cyan">£191.1K</div>
-            <div class="demo-card-sub">Confidence MEDIUM · 90% £133K–£258K</div>
+            <div class="demo-card-sub">Confidence MEDIUM</div>
           </div>
           <div class="demo-card">
             <div class="demo-card-label">Statutory Risk</div>
@@ -865,7 +929,7 @@
         </div>
         <div style="margin-top:1.25rem;padding:1rem;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--text2);line-height:1.7;">
           <strong style="color:var(--text);font-family:var(--mono);font-size:11px;letter-spacing:0.06em;">STATUTORY-RISK CASE FILE:</strong><br>
-          WS3 3PR: market value (AVM) £191.1K, with a calibrated 90% range of £133K–£258K. PropOS identifies a coalfield consultation area, evidenced against the Coal Authority dataset, and recommends a CON29M search before reliance; shrink-swell and flood were screened and not flagged here. Statutory risk is assessed and flagged with full provenance — it is not priced into the value. PropOS reflects a risk in the value only where the market robustly evidences a discount.
+          WS3 3PR: market value (AVM) £191.1K. PropOS identifies a coalfield consultation area, evidenced against the Coal Authority dataset, and recommends a CON29M search before reliance; shrink-swell and flood were screened and not flagged here. Statutory risk is assessed and flagged with full provenance — it is not priced into the value. PropOS reflects a risk in the value only where the market robustly evidences a discount.
         </div>
       </div>
     </div>
@@ -882,7 +946,7 @@
     <div class="problem-grid" style="margin-top:2.5rem;">
       <div class="problem-cell">
         <h3 style="font-size:22px;">Your AVM stays</h3>
-        <p>We add an independent statutory and property-risk assessment alongside the value it produces.</p>
+        <p>We add an independent statutory, ownership and property-risk assessment alongside the value it produces.</p>
       </div>
       <div class="problem-cell">
         <h3 style="font-size:22px;">Your valuation panel stays</h3>
@@ -909,7 +973,7 @@
     </p>
     <div class="segment-grid">
       <div class="segment-card s1">
-        <div class="segment-icon">🏦</div>
+        <div class="segment-marker">01 / CREDIT</div>
         <h3>Credit Risk</h3>
         <p>Apply a consistent second-lens review to residential collateral risk and retain the evidence behind each finding.</p>
         <ul class="segment-bullets">
@@ -920,9 +984,9 @@
         </ul>
       </div>
       <div class="segment-card s2">
-        <div class="segment-icon">📊</div>
+        <div class="segment-marker">02 / VALUATION</div>
         <h3>Valuation Teams</h3>
-        <p>See statutory and location-specific property risk alongside the AVM or valuation without asking a valuation model to answer a different question.</p>
+        <p>See statutory, ownership and location-specific property risk alongside the AVM or valuation without asking a valuation model to answer a different question.</p>
         <ul class="segment-bullets">
           <li>AVM remains in place</li>
           <li>Risk sits alongside market value</li>
@@ -931,18 +995,18 @@
         </ul>
       </div>
       <div class="segment-card s3">
-        <div class="segment-icon">✅</div>
+        <div class="segment-marker">03 / UNDERWRITING</div>
         <h3>Underwriting</h3>
         <p>Move from hazard flags to an evidence-backed case file with a clear recommended next action and a reproducible audit trail.</p>
         <ul class="segment-bullets">
           <li>Severity-graded findings</li>
           <li>Recommended underwriter action</li>
-          <li>CON29M workflow where relevant</li>
+          <li>Freeholder status at point of decision</li>
           <li>Evidence retained per property</li>
         </ul>
       </div>
       <div class="segment-card s4">
-        <div class="segment-icon">🗺️</div>
+        <div class="segment-marker">04 / PORTFOLIO</div>
         <h3>Portfolio Risk</h3>
         <p>Apply the same property-risk logic across historic or current residential portfolios to identify concentrations and cases for review.</p>
         <ul class="segment-bullets">
@@ -964,7 +1028,7 @@
     <div class="section-tag">UK Property Data Infrastructure</div>
     <h2 class="section-title" id="data-title">Property Risk Intelligence<br>Built on 17+ UK Data Sources.</h2>
     <p class="section-sub">
-      Landstrata integrates statutory, environmental, geospatial and property-market datasets into a single property-risk intelligence layer. The value is not data access alone; it is the deterministic assembly of evidence, risk findings and decision-ready outputs at property level.
+      Landstrata integrates statutory, environmental, geospatial, corporate and property-market datasets into a single property-risk intelligence layer. The value is not data access alone; it is the deterministic assembly of evidence, risk findings and decision-ready outputs at property level.
     </p>
     <div class="data-grid">
       <div class="data-cell"><div class="data-source">HMLR</div><h4>Price Paid Data</h4><p>30M+ transactions, 1995–present</p></div>
@@ -972,12 +1036,12 @@
       <div class="data-cell"><div class="data-source">EA</div><h4>NaFRA2 Flood Risk</h4><p>Flood Zones 2 &amp; 3, surface water</p></div>
       <div class="data-cell"><div class="data-source">Natural England</div><h4>Environmental</h4><p>ALC, SSSI, AONB, ancient woodland</p></div>
       <div class="data-cell"><div class="data-source">HMLR CCOD/OCOD</div><h4>Ownership Data</h4><p>4.4M corporate &amp; overseas titles</p></div>
+      <div class="data-cell"><div class="data-source">Companies House</div><h4>Corporate Register</h4><p>Live status, activity, incorporation</p></div>
       <div class="data-cell"><div class="data-source">Historic England</div><h4>Heritage</h4><p>Listed buildings, scheduled monuments</p></div>
       <div class="data-cell"><div class="data-source">Coal Authority</div><h4>Coal Mining Risk</h4><p>Coalfield consultation areas</p></div>
       <div class="data-cell"><div class="data-source">Planning.data.gov.uk</div><h4>Planning Context</h4><p>HDT, local plan status, Article 4</p></div>
       <div class="data-cell"><div class="data-source">ONS Census 2021</div><h4>Demographics</h4><p>Tenure, deprivation, employment</p></div>
-      <div class="data-cell"><div class="data-source">MHCLG</div><h4>EPC Register</h4><p>28.6M energy performance certificates</p></div>
-      <div class="data-cell"><div class="data-source">Ofcom 2025</div><h4>Connectivity</h4><p>Superfast, full fibre, 5G coverage</p></div>
+      <div class="data-cell"><div class="data-source">MHCLG</div><h4>EPC Register</h4><p>Energy performance certificates</p></div>
       <div class="data-cell"><div class="data-source">OS Open UPRN</div><h4>Property Reference</h4><p>41M+ unique property identifiers</p></div>
     </div>
   </div>
@@ -1000,7 +1064,7 @@
       <div class="flow-step">
         <div class="flow-num">2</div>
         <h4>Retrieve Evidence</h4>
-        <p>Query the relevant statutory, environmental, geological and market datasets for that location.</p>
+        <p>Query the relevant statutory, environmental, geological, corporate and market datasets for that location.</p>
         <div class="flow-tech">Multi-source · Geospatial · Property-level</div>
       </div>
       <div class="flow-step">
@@ -1033,7 +1097,7 @@
     <div class="faq-grid">
       <div class="faq-item">
         <h3>What is residential collateral risk?</h3>
-        <p>It is the property-specific risk that matters when a home is being relied on as security for a mortgage. PropOS IQ focuses on statutory, environmental and location-specific evidence such as coal mining, flood, ground stability, contamination and planning context.</p>
+        <p>It is the property-specific risk that matters when a home is being relied on as security for a mortgage. PropOS IQ focuses on statutory, environmental, ownership and location-specific evidence such as coal mining, flood, ground stability, contamination, planning context and the status of the registered proprietor.</p>
       </div>
       <div class="faq-item">
         <h3>Does PropOS IQ replace an AVM?</h3>
@@ -1044,8 +1108,16 @@
         <p>Where Coal Authority evidence indicates a relevant coalfield risk, PropOS IQ records the evidence and can recommend the appropriate next step, such as a CON29M coal mining search before reliance.</p>
       </div>
       <div class="faq-item">
+        <h3>Why does the freeholder's status matter?</h3>
+        <p>On a leasehold property, the freeholder is responsible for management, service charge collection and lease enforcement. Where the registered proprietor is in administration, has a receiver appointed or is heading for strike-off, that responsibility is compromised — a fact recorded on the public register but rarely surfaced at the point of underwriting.</p>
+      </div>
+      <div class="faq-item">
         <h3>Why assess risk at UPRN level?</h3>
         <p>A UPRN provides a consistent property reference for joining evidence from multiple datasets to the same location, helping keep the assessment traceable and reproducible.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is statutory risk priced into the value?</h3>
+        <p>No. Statutory risk is assessed, flagged and evidenced with full provenance. PropOS IQ reflects a risk in the value only where the market robustly evidences a discount, rather than applying an adjustment the evidence does not support.</p>
       </div>
     </div>
   </div>
@@ -1085,6 +1157,7 @@
     <a href="#solution">Platform</a>
     <a href="#lenders">For Lenders</a>
     <a href="#property-risk">Property Risk</a>
+    <a href="#ownership">Ownership</a>
     <a href="#data">Data</a>
     <a href="#faq">FAQ</a>
     <a href="https://calendly.com/kuldip-landstrata/15-minute-meeting" target="_blank" rel="noopener" onclick="trackEvent('click_book_demo','engagement','footer_demo_anchor')">Demo</a>
