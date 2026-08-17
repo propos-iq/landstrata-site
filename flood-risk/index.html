@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="canonical" href="https://landstrata.co.uk/flood-risk/">
   <meta charset="UTF-8">
+  <link rel="canonical" href="https://landstrata.co.uk/flood-risk/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Property Risk Intelligence for Mortgage Lenders | Landstrata</title>
   <meta name="description" content="Landstrata provides residential property risk intelligence for UK mortgage lenders. PropOS IQ assesses coal mining, flood, ground stability, contamination, planning and corporate ownership risk at UPRN level alongside your existing AVM or valuation.">
@@ -650,6 +650,7 @@
     <a href="#ownership">Ownership</a>
     <a href="#data">Data</a>
     <a href="#how">How It Works</a>
+    <a href="#architecture">Architecture</a>
     <a href="https://calendly.com/kuldip-landstrata/15-minute-meeting" target="_blank" rel="noopener" class="nav-cta" onclick="trackEvent('click_book_demo','engagement','nav_book_demo')">Book a Demo</a>
   </div>
 </nav>
@@ -1090,6 +1091,51 @@
   </div>
 </section>
 
+<section id="architecture" style="background: var(--navy);" aria-labelledby="architecture-title">
+  <div class="container">
+    <div class="section-tag">Architecture</div>
+    <h2 class="section-title" id="architecture-title">AI At The Interface.<br>Determinism At The Decision.</h2>
+    <p class="section-sub">
+      PropOS IQ uses AI where language and retrieval are the hard problem, and deterministic rules where the answer has to be defensible. A lender can ask a question in plain English and get a readable case file — but no risk finding in that file originates from a model.
+    </p>
+
+    <div class="problem-grid" style="margin-top:2.5rem;">
+      <div class="problem-cell">
+        <div class="problem-marker">WHAT THE AI DOES</div>
+        <h3>Resolve, Retrieve, Explain</h3>
+        <p>
+          Interprets the request, resolves it to a property or UPRN, orchestrates retrieval across the underlying datasets, and writes the case file in language an underwriter can read. It handles the interface, not the judgement.
+        </p>
+      </div>
+      <div class="problem-cell">
+        <div class="problem-marker">WHAT THE AI NEVER DOES</div>
+        <h3>Decide The Risk</h3>
+        <p>
+          Every risk finding comes from a versioned deterministic rule carrying its statutory authority, jurisdiction and the date the law was assessed at. No finding is generated, inferred or softened by a language model.
+        </p>
+      </div>
+      <div class="problem-cell">
+        <div class="problem-marker">THE VALUATION MODEL</div>
+        <h3>Machine Learning, Stated Plainly</h3>
+        <p>
+          The market value is produced by a gradient-boosted model trained on 30M+ Land Registry transactions, validated out-of-time at 9.6% median absolute percentage error, with a confidence grade attached to every property rather than a single headline accuracy claim.
+        </p>
+      </div>
+      <div class="problem-cell">
+        <div class="problem-marker">WHY IT MATTERS</div>
+        <h3>Reproducible By Design</h3>
+        <p>
+          The same property assessed against the same rule version returns the same finding, with the evidence retained. That is what makes the output reviewable by a credit risk or model governance function rather than merely persuasive.
+        </p>
+      </div>
+    </div>
+
+    <div class="sector-note">
+      <strong style="color:var(--text);">Governance position:</strong> statutory findings are rule-based, versioned and evidenced; valuation is a statistical model with published out-of-time performance and per-property confidence. The two are reported separately and never blended into a single unexplainable score.
+    </div>
+  </div>
+</section>
+
 <section class="faq" id="faq" aria-labelledby="faq-title">
   <div class="container">
     <div class="section-tag">Mortgage Property Risk</div>
@@ -1115,6 +1161,10 @@
       <div class="faq-item">
         <h3>Why assess risk at UPRN level?</h3>
         <p>A UPRN provides a consistent property reference for joining evidence from multiple datasets to the same location, helping keep the assessment traceable and reproducible.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is PropOS IQ an AI product?</h3>
+        <p>Partly, and the distinction matters. AI resolves the property, retrieves evidence across the underlying datasets and writes the case file. The risk findings themselves come from versioned deterministic rules, each carrying its statutory authority and the date the law was assessed at, so the same property returns the same finding every time. The market value is produced by a gradient-boosted statistical model with published out-of-time performance and a confidence grade per property.</p>
       </div>
       <div class="faq-item">
         <h3>Is statutory risk priced into the value?</h3>
@@ -1160,6 +1210,7 @@
     <a href="#property-risk">Property Risk</a>
     <a href="#ownership">Ownership</a>
     <a href="#data">Data</a>
+    <a href="#architecture">Architecture</a>
     <a href="#faq">FAQ</a>
     <a href="https://calendly.com/kuldip-landstrata/15-minute-meeting" target="_blank" rel="noopener" onclick="trackEvent('click_book_demo','engagement','footer_demo_anchor')">Demo</a>
     <a href="mailto:info@landstrata.co.uk" onclick="trackEvent('click_email_link','engagement','footer_contact_email')">Contact</a>
