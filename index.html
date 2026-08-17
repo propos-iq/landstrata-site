@@ -619,12 +619,62 @@
     }
     .faq-item p { font-size: 14px; color: var(--text2); line-height: 1.7; }
 
+    /* Live coverage block */
+    .coverage {
+      margin-top: 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+      overflow: hidden;
+    }
+    .coverage-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap;
+      padding: 0.9rem 1.25rem;
+      background: var(--navy3);
+      border-bottom: 1px solid var(--border);
+    }
+    .coverage-title {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .coverage-asat {
+      font-family: var(--mono); font-size: 11px; color: var(--text3);
+      letter-spacing: 0.04em;
+    }
+    .coverage-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+    }
+    .coverage-cell { background: var(--navy); padding: 1.35rem 1.25rem; }
+    .coverage-value {
+      font-family: var(--display); font-size: 34px; line-height: 1;
+      color: var(--cyan); letter-spacing: 0.02em; margin-bottom: 6px;
+    }
+    .coverage-label {
+      font-size: 14px; color: var(--text); font-weight: 500;
+      margin-bottom: 8px; line-height: 1.4;
+    }
+    .coverage-scope { font-size: 12px; color: var(--text3); line-height: 1.6; }
+    .coverage-loading {
+      grid-column: 1 / -1; background: var(--navy);
+      padding: 1.5rem 1.25rem; font-size: 14px; color: var(--text3);
+    }
+    .coverage-foot {
+      padding: 0.9rem 1.25rem; font-size: 12px; color: var(--text3);
+      line-height: 1.6; border-top: 1px solid var(--border);
+    }
+
     @media (max-width: 900px) {
       .risk-links { grid-template-columns: repeat(3, 1fr); }
+      .coverage-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       .risk-links { grid-template-columns: repeat(2, 1fr); }
       .faq-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      .coverage-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -850,6 +900,19 @@
         </div>
       </article>
 
+    </div>
+
+    <div class="coverage" id="coverage" data-state="loading">
+      <div class="coverage-head">
+        <span class="coverage-title">Current coverage</span>
+        <span class="coverage-asat" id="coverage-asat"></span>
+      </div>
+      <div class="coverage-grid" id="coverage-grid">
+        <div class="coverage-loading">Loading current figures…</div>
+      </div>
+      <p class="coverage-foot">
+        Figures are computed from the live platform and carry the date they were last recomputed. Each states what it counts — several are floors on address-match recall rather than measures of the underlying population, and are labelled accordingly.
+      </p>
     </div>
 
     <div class="sector-note">
@@ -1233,6 +1296,85 @@
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
   });
+</script>
+
+<script>
+(function () {
+  // PropOS IQ public coverage endpoint (Cloud Run origin).
+  var COVERAGE_ENDPOINT = 'https://REPLACE-ME.a.run.app/api/public/coverage';
+
+  // The page decides what it publishes, not the API. Anything not listed here
+  // is ignored even if the endpoint returns it.
+  var SHOW = [
+    'ownership_uprns_attributed',
+    'proprietor_distressed',
+    'plant_roof_leases',
+    'ownership_freeholder_level',
+    'corporate_controllers',
+    'properties_scored'
+  ];
+
+  var wrap = document.getElementById('coverage');
+  var grid = document.getElementById('coverage-grid');
+  var asAtEl = document.getElementById('coverage-asat');
+  if (!wrap || !grid) return;
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+    });
+  }
+
+  function fmtDate(iso) {
+    try {
+      return new Date(iso).toLocaleDateString('en-GB',
+        { day: 'numeric', month: 'long', year: 'numeric' });
+    } catch (e) { return ''; }
+  }
+
+  function render(data) {
+    var byKey = {};
+    (data.metrics || []).forEach(function (m) { byKey[m.metricKey] = m; });
+
+    var html = '';
+    SHOW.forEach(function (key) {
+      var m = byKey[key];
+      if (!m || !m.scopeNote) return;   // never render a value without its scope
+      html += '<div class="coverage-cell">'
+            +   '<div class="coverage-value">' + esc(m.displayValue) + '</div>'
+            +   '<div class="coverage-label">' + esc(m.label) + '</div>'
+            +   '<div class="coverage-scope">' + esc(m.scopeNote) + '</div>'
+            + '</div>';
+    });
+
+    if (!html) { fail(); return; }
+
+    grid.innerHTML = html;
+    if (data.asAt) asAtEl.textContent = 'As at ' + fmtDate(data.asAt);
+    wrap.setAttribute('data-state', 'ready');
+
+    if (typeof trackEvent === 'function') {
+      trackEvent('coverage_loaded', 'engagement', 'ownership_coverage');
+    }
+  }
+
+  function fail() {
+    // Degrade to nothing rather than to a stale hardcoded number.
+    wrap.setAttribute('data-state', 'error');
+    wrap.style.display = 'none';
+  }
+
+  var ctl = new AbortController();
+  var timer = setTimeout(function () { ctl.abort(); }, 6000);
+
+  fetch(COVERAGE_ENDPOINT, { signal: ctl.signal, credentials: 'omit' })
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function (data) { clearTimeout(timer); render(data); })
+    .catch(function () { clearTimeout(timer); fail(); });
+})();
 </script>
 </body>
 </html>
