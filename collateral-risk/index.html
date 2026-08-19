@@ -1306,12 +1306,13 @@
 
   // The page decides what it publishes, not the API. Anything not listed here
   // is ignored even if the endpoint returns it.
+  // corporate_controllers is deliberately withheld: the controller count moved
+  // sharply after the title-bridge repoint and is not yet explained.
   var SHOW = [
     'ownership_uprns_attributed',
-    'proprietor_distressed',
+    'proprietor_insolvent',
     'plant_roof_leases',
     'ownership_freeholder_level',
-    'corporate_controllers',
     'properties_scored'
   ];
 
